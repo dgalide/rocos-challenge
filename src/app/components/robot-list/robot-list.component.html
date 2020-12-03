@@ -8,10 +8,11 @@
   </mat-form-field>
 
   <button (click)="getRobots()" mat-raised-button>Get Robots</button>
+  <button (click)="unsub()" mat-raised-button>Unsub</button>
 
   <ng-container *ngIf="robots$">
     <mat-selection-list #robots [multiple]="false">
-      <mat-list-option *ngFor="let robot of (robots$ | async)" [value]="robot">
+      <mat-list-option (click)="selectRobot()" *ngFor="let robot of (robots$ | async)" [value]="robot">
         {{ robot.name }}
       </mat-list-option>
     </mat-selection-list>
