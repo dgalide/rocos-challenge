@@ -1,0 +1,20 @@
+<form [formGroup]="form" class="container">
+  <mat-form-field appearance="outline" class="w-input">
+    <mat-label>Application ID</mat-label>
+    <input matInput formControlName="applicationId">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="w-input">
+    <mat-label>Secret</mat-label>
+    <input matInput formControlName="secret">
+  </mat-form-field>
+
+  <button (click)="getToken()" mat-raised-button>Get Token</button>
+
+  <ng-container *ngIf="token$">
+    <mat-form-field appearance="outline" class="w-input">
+      <mat-label>Token</mat-label>
+      <input disabled matInput [value]="token$ | async">
+    </mat-form-field>
+  </ng-container>
+</form>
