@@ -1,17 +1,19 @@
 import { AuthService } from './../../services/auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, share } from 'rxjs/operators';
+import { ITokenResponse } from 'src/app/models/ITokenReponse';
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css']
 })
-export class AuthComponent implements OnInit {
+export class AuthComponent implements OnInit, OnDestroy {
 
   public form: FormGroup;
+  public response$: Observable<ITokenResponse>;
   public token$: Observable<string>;
 
   constructor(private authService: AuthService, private fb: FormBuilder) { }
@@ -23,8 +25,13 @@ export class AuthComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(): void {
+  }
+
   public getToken(): void {
-    this.token$ = this.authService.getToken(this.form.value).pipe(
+    this.response$ = this.authService.getToken(this.form.value).pipe(share());
+
+    this.token$ = this.response$.pipe(
       map(res => res.token)
     );
   }
