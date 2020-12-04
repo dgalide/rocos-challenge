@@ -21,6 +21,7 @@
     "@angular/platform-browser": "~9.1.12",
     "@angular/platform-browser-dynamic": "~9.1.12",
     "@angular/router": "~9.1.12",
+    "ng-canvas-gauges": "^6.0.4",
     "ngx-json-viewer": "^2.4.0",
     "rocos-js": "https://sdk.rocos.io/js/rocos-js-0.3.0-stable.latest.tgz",
     "rxjs": "~6.5.4",

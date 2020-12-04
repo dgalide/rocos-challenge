@@ -1,5 +1,3 @@
-import { AuthService } from './../../services/auth.service';
-import { AttitudeDataService } from './../../services/attitude-data.service';
 import { RobotService } from './../../services/robot.service';
 import { Observable, Subscription } from 'rxjs';
 import { IRobotResponse } from './../../models/IRobotResponse';
@@ -19,7 +17,7 @@ export class RobotListComponent implements OnInit {
 
   sub: Subscription;
 
-  constructor(private fb: FormBuilder, private robotService: RobotService, private auth: AuthService) { }
+  constructor(private fb: FormBuilder, private robotService: RobotService) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -32,11 +30,11 @@ export class RobotListComponent implements OnInit {
   }
 
   public selectRobot(): void {
-    const flm = new FastLaneManager('https://api2.rocos.io');
-    flm.updateToken(this.auth.token);
-    const bla = flm.subscribe('front-end-challenge', ['drone-rocos'], ['/mavlink/ATTITUDE']);
+    // const flm = new FastLaneManager('https://api2.rocos.io');
+    // flm.updateToken(this.auth.token);
+    // const bla = flm.subscribe('front-end-challenge', ['drone-rocos'], ['/mavlink/ATTITUDE']);
 
-    this.sub = bla.subject.subscribe(console.log) as any;
+    // this.sub = bla.subject.subscribe(console.log) as any;
   }
 
   public unsub() {

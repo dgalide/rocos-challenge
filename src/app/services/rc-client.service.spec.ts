@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AuthService } from './auth.service';
+import { RcClientService } from './rc-client.service';
 
-describe('AuthService', () => {
-  let service: AuthService;
+describe('RcClientService', () => {
+  let service: RcClientService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(AuthService);
+    service = TestBed.inject(RcClientService);
   });
 
   it('should be created', () => {

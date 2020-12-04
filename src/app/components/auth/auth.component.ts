@@ -1,22 +1,19 @@
-import { AuthService } from './../../services/auth.service';
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { map, share } from 'rxjs/operators';
-import { ITokenResponse } from 'src/app/models/ITokenReponse';
+import { RcClientService } from './../../services/rc-client.service';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css']
 })
-export class AuthComponent implements OnInit, OnDestroy {
+export class AuthComponent implements OnInit {
 
   public form: FormGroup;
-  public response$: Observable<ITokenResponse>;
   public token$: Observable<string>;
 
-  constructor(private authService: AuthService, private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private rcClient: RcClientService) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -25,15 +22,10 @@ export class AuthComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
-  }
-
-  public getToken(): void {
-    this.response$ = this.authService.getToken(this.form.value).pipe(share());
-
-    this.token$ = this.response$.pipe(
-      map(res => res.token)
-    );
+  public authenticate(): void {
+    this.token$ = this.rcClient.authenticate(
+      this.form.get('applicationId').value,
+      this.form.get('secret').value) as any;
   }
 
 }

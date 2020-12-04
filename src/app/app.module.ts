@@ -1,7 +1,6 @@
-import { TokenInterceptor } from './services/token.interceptor';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AuthComponent } from './components/auth/auth.component';
@@ -13,14 +12,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { RobotListComponent } from './components/robot-list/robot-list.component';
 import { MatListModule } from '@angular/material/list';
-
+import { HeadingGaugeComponent } from './components/heading-gauge/heading-gauge.component';
+import { GaugesModule } from 'ng-canvas-gauges';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
-    RobotListComponent
+    RobotListComponent,
+    HeadingGaugeComponent
   ],
   imports: [
     BrowserModule,
@@ -32,15 +33,10 @@ import { MatListModule } from '@angular/material/list';
     MatFormFieldModule,
     MatButtonModule,
     NgxJsonViewerModule,
-    MatListModule
+    MatListModule,
+    GaugesModule
   ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true
-    }
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
