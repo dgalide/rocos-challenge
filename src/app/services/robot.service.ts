@@ -1,6 +1,6 @@
-import { IRobotResponse } from './../models/IRobotResponse';
+import { RcClientService } from './rc-client.service';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { map } from 'rocos-js/node_modules/rxjs/operators';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -8,9 +8,16 @@ import { Injectable } from '@angular/core';
 })
 export class RobotService {
 
-  constructor(private httpClient: HttpClient) {}
+  private robotList$: Observable<any[]>;
 
-  public getRobots(projectId: string): Observable<IRobotResponse[]> {
-    return this.httpClient.get(`https://api2.rocos.io/projects/${projectId}/robots`) as Observable<IRobotResponse[]>;
+  constructor(private rcClient: RcClientService) {}
+
+  public getRobotList(projectID: string): Observable<any> {
+    this.robotList$ = this.rcClient.getClient().robot.list(projectID)
+      .pipe(
+        map(res => res.data)
+    ) as any;
+
+    return this.robotList$;
   }
 }
