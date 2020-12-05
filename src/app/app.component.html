@@ -1,4 +1,7 @@
 <div class="main-container">
   <app-auth></app-auth>
-  <app-robot-list></app-robot-list>
+  <app-robot-list (selectedRobot)="selectedRobot = $event"></app-robot-list>
+  <ng-container *ngIf="selectedRobot">
+      <app-telemetry-visualization [selectedRobot]="selectedRobot"></app-telemetry-visualization>
+  </ng-container>
 </div>

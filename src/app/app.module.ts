@@ -9,11 +9,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
-import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { RobotListComponent } from './components/robot-list/robot-list.component';
 import { MatListModule } from '@angular/material/list';
-import { HeadingGaugeComponent } from './components/heading-gauge/heading-gauge.component';
-import { GaugesModule } from 'ng-canvas-gauges';
+import { TelemetryVisualizationComponent } from './components/telemetry-visualization/telemetry-visualization.component';
 
 
 @NgModule({
@@ -21,7 +19,7 @@ import { GaugesModule } from 'ng-canvas-gauges';
     AppComponent,
     AuthComponent,
     RobotListComponent,
-    HeadingGaugeComponent
+    TelemetryVisualizationComponent
   ],
   imports: [
     BrowserModule,
@@ -32,9 +30,7 @@ import { GaugesModule } from 'ng-canvas-gauges';
     MatInputModule,
     MatFormFieldModule,
     MatButtonModule,
-    NgxJsonViewerModule,
     MatListModule,
-    GaugesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

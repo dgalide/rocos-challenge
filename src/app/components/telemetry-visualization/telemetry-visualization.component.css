@@ -1,0 +1,13 @@
+.instruments {
+  display: flex;
+  justify-content: center;
+}
+
+.controls {
+  justify-content: center;
+  display: flex;
+}
+
+.container {
+  padding: 15px;
+}

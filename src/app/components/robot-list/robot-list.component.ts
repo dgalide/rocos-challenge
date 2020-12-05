@@ -2,7 +2,7 @@ import { TelemetryService } from './../../services/telemetry.service';
 import { RobotService } from './../../services/robot.service';
 import { Observable, Subscription } from 'rxjs';
 import { IRobotResponse } from './../../models/IRobotResponse';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 @Component({
   selector: 'app-robot-list',
@@ -13,6 +13,8 @@ export class RobotListComponent implements OnInit {
 
   public form: FormGroup;
   public robots$: Observable<IRobotResponse[]>;
+
+  @Output() selectedRobot: EventEmitter<string> = new EventEmitter();
 
   sub: Subscription;
 
@@ -28,12 +30,8 @@ export class RobotListComponent implements OnInit {
     this.robots$ = this.robotService.getRobotList(this.form.get('projectId').value);
   }
 
-  public selectRobot(): void {
-    this.tlmService.getRobotTelemetry('front-end-challenge', ['drone-rocos'], ['/mavlink/ATTITUDE']).subscribe(console.log);
-  }
-
-  public unsub() {
-    this.tlmService.unsubscribe();
+  public selectRobot(name: string): void {
+    this.selectedRobot.emit(name);
   }
 
 }
