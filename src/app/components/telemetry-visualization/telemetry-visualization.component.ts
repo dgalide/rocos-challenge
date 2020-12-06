@@ -1,6 +1,5 @@
 import { TelemetryService } from './../../services/telemetry.service';
 import { Component, Input, OnInit } from '@angular/core';
-import { AstMemoryEfficientTransformer } from '@angular/compiler';
 
 declare var $: any;
 
@@ -39,9 +38,9 @@ export class TelemetryVisualizationComponent implements OnInit {
 
     this.sub = this.telemetry.subscribe(tlm => {
       console.log(tlm.payload);
-      this.pitchRollIndicator.setRoll(tlm.payload.roll);
-      this.pitchRollIndicator.setPitch(tlm.payload.pitch);
-      this.yawIndicator.setHeading(tlm.payload.yaw);
+      this.pitchRollIndicator.setRoll(this.radiansToDegree(tlm.payload.roll));
+      this.pitchRollIndicator.setPitch(this.radiansToDegree(tlm.payload.pitch));
+      this.yawIndicator.setHeading(this.radiansToDegree(tlm.payload.yaw));
     });
   }
 
@@ -49,6 +48,10 @@ export class TelemetryVisualizationComponent implements OnInit {
     if (this.sub) {
       this.sub.unsubscribe();
     }
+  }
+
+  radiansToDegree(radians: number): number {
+    return radians * 180 / Math.PI;
   }
 
 }
