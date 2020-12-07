@@ -11,9 +11,9 @@ declare var $: any;
 export class TelemetryVisualizationComponent implements OnInit {
 
   pitchRollIndicator: any;
-  yawIndicator: any;
   sub: any;
   telemetry: any;
+  yaw: number;
   @Input() selectedRobot: string;
 
   constructor(private tlmService: TelemetryService) { }
@@ -30,18 +30,20 @@ export class TelemetryVisualizationComponent implements OnInit {
     };
 
     this.pitchRollIndicator = $.flightIndicator('#attitude', 'attitude', options);
-    this.yawIndicator = $.flightIndicator('#heading', 'heading', options);
     this.telemetry = this.tlmService.getRobotTelemetry('front-end-challenge', [this.selectedRobot], ['/mavlink/ATTITUDE']);
   }
 
   subscribe(): void {
 
     this.sub = this.telemetry.subscribe(tlm => {
-      console.log(tlm.payload);
-      this.pitchRollIndicator.setRoll(this.radiansToDegree(tlm.payload.roll));
-      this.pitchRollIndicator.setPitch(this.radiansToDegree(tlm.payload.pitch));
-      this.yawIndicator.setHeading(this.radiansToDegree(tlm.payload.yaw));
+      const roll = this.radiansToDegree(tlm.payload.roll);
+      this.pitchRollIndicator.setRoll(roll);
+      const pitch = this.radiansToDegree(tlm.payload.pitch);
+      this.pitchRollIndicator.setPitch(pitch);
+      this.yaw = tlm.payload.yaw;
     });
+
+
   }
 
   unsubscribe(): void {

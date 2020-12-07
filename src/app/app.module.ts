@@ -1,3 +1,4 @@
+import { HeadingGaugeComponent } from './components/heading-gauge/heading-gauge.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -19,7 +20,8 @@ import { TelemetryVisualizationComponent } from './components/telemetry-visualiz
     AppComponent,
     AuthComponent,
     RobotListComponent,
-    TelemetryVisualizationComponent
+    TelemetryVisualizationComponent,
+    HeadingGaugeComponent
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,7 @@
 <div class="container">
   <div class="instruments">
     <span id="attitude"></span>
-    <span id="heading"></span>
+    <app-heading-gauge [angle]="yaw"></app-heading-gauge>
   </div>
   <div class="controls">
     <button (click)="unsubscribe()" mat-raised-button>Unsubscribe</button>
