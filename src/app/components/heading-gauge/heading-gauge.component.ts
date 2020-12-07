@@ -15,6 +15,7 @@ export class HeadingGaugeComponent implements OnInit, OnChanges {
   tickHeight = 15;
   gaugeLabels = ['S', '21', '24', 'W', '30', '33', 'N', '3', '6', 'E', '12', '15'];
   gaugeRadius = 100;
+  img: any;
 
   ctx: CanvasRenderingContext2D;
 
@@ -22,7 +23,12 @@ export class HeadingGaugeComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.ctx = this.headingGauge.nativeElement.getContext('2d');
-    this.drawGauge(0);
+    const img = new Image();
+    img.src = 'assets/img/heading_mechanics.svg';
+    img.onload = () => {
+      this.img = img;
+      this.drawGauge(0);
+    };
   }
 
   ngOnChanges(): void {
@@ -74,12 +80,8 @@ export class HeadingGaugeComponent implements OnInit, OnChanges {
   }
 
   drawPlane() {
-    const image = new Image();
-    image.src = 'assets/img/heading_mechanics.svg';
-    image.onload = () => {
-        this.ctx.setTransform(1, 0, 0, 1, 100, 100);
-        this.ctx.drawImage(image, -90, -90, 180, 180);
-    };
+    this.ctx.setTransform(1, 0, 0, 1, 100, 100);
+    this.ctx.drawImage(this.img, -90, -90, 180, 180);
   }
 
 }

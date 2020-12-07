@@ -41,8 +41,8 @@ export class TelemetryVisualizationComponent implements OnInit {
       const pitch = this.radiansToDegree(tlm.payload.pitch);
       this.pitchRollIndicator.setPitch(pitch);
       this.yaw = tlm.payload.yaw;
+      console.log(tlm.payload);
     });
-
 
   }
 
